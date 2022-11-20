@@ -66,7 +66,7 @@ for (let propiedad of propiedadesJSON) {
 
 btnBuscar.addEventListener("click", () => {
   if (inputCuartos.value <= 0 || inputMax.value <= 0 || inputMin.value < 0) {
-    alert("Debe ingresar valores distintos de 0");
+    alert("Debe ingresar valores mayores a 0");
     return;
   }
 
