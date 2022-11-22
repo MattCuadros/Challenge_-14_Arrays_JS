@@ -48,9 +48,7 @@ const inputMin = document.querySelector("#inputMin");
 const inputMax = document.querySelector("#inputMax");
 const formulario=document.querySelector("#formulario");
 const divPropiedades=document.querySelector(".propiedades");
-
-
-
+const spanTotal=document.querySelector("#spanTotal");
 
 function renderPropiedades(array) {
   if (array.length === 0) {
@@ -73,6 +71,7 @@ function renderPropiedades(array) {
                 </section>
         </div>`;
     }
+    spanTotal.innerHTML=`${array.length}`
   }
 }
 
