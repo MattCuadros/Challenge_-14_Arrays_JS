@@ -11,7 +11,7 @@ const propiedadesJSON = [
     description: "Despierta tus días oyendo el oceano",
     src: "./assets/img/casas-en-la-playa-en-yucatan-2712.jpg",
     rooms: "2",
-    m: 130,
+    m: "130",
   },
   {
     name: "Casa en el centro",
@@ -47,47 +47,41 @@ const inputCuartos = document.querySelector("#inputCuartos");
 const inputMin = document.querySelector("#inputMin");
 const inputMax = document.querySelector("#inputMax");
 const btnBuscar = document.querySelector("#btnBuscar");
+const formulario=document.querySelector("#formulario");
+const divPropiedades=document.querySelector("#divPropiedades")
+const arrayFiltrado=[]
 
-for (let propiedad of propiedadesJSON) {
-  document.querySelector(".propiedades").innerHTML += `
-   <div class="propiedad">
-       <div  class="img" style="background-image: url(${propiedad.src})"></div>
-       <section>
-           <h5 >${propiedad.name}</h5>
-           <div class="d-flex justify-content-between">
-               <p>Cuartos: ${propiedad.rooms}</p>
-               <p>Metros: ${propiedad.m}</p>
-           </div>
-           <p class="my-3">${propiedad.description}</p>
-           <button class="btn btn-info ">Ver más</button>
-       </section>
-   </div>`;
+
+
+function renderPropiedades(array){
+  if (array.length===0){
+    divPropiedades.innerHTML = `<h5 >No hay Propiedades que mostrar. Favor limpie el filtro y haga otra búsqueda</h5>`
+  } else{
+      divPropiedades.innerHTML = "";
+      for (let propiedad of array) {
+        renderPropiedades(array);
+      }
+   }
 }
 
-btnBuscar.addEventListener("click", () => {
-  if (inputCuartos.value <= 0 || inputMax.value <= 0 || inputMin.value < 0) {
+renderPropiedades(propiedadesJSON);
+
+formulario.addEventListener("reset",()=>renderPropiedades(propiedadesJSON))
+formulario.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let cantCuartos=+inputCuartos.value;
+  let min=+inputMin.value;
+  let max=+inputMax.value;
+  if (cantCuartos <= 0 || max <= 0 || min < 0) {
     alert("Debe ingresar valores mayores a 0");
     return;
-  }
-
-  console.log("entre al if");
-  document.querySelector(".propiedades").innerHTML = "";
-
-  for (let propiedad of propiedadesJSON) {
-    if (propiedad.rooms === inputCuartos.value && propiedad.m>=inputMin.value && propiedad.m<=inputMax.value) {
-      document.querySelector(".propiedades").innerHTML += `
-   <div class="propiedad">
-       <div  class="img" style="background-image: url(${propiedad.src})"></div>
-       <section>
-           <h5 >${propiedad.name}</h5>
-           <div class="d-flex justify-content-between">
-               <p>Cuartos: ${propiedad.rooms}</p>
-               <p>Metros: ${propiedad.m}</p>
-           </div>
-           <p class="my-3">${propiedad.description}</p>
-           <button class="btn btn-info ">Ver más</button>
-       </section>
-   </div>`;
+  } else{
+    console.log("entre al if"); 
+    for (let propiedad of propiedadesJSON) {
+      if (propiedad.rooms === cantCuartos && propiedad.m>=min && propiedad.m<=max) {
+        arrayFiltrado.push(propiedad);
+      }
     }
-  }
+    renderPropiedades(arrayFiltrado);
+    }
 });

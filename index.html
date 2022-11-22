@@ -14,7 +14,7 @@
 <body>
 
     <nav>
-        <section>
+        <form id="formulario">
             <div>
                 <p>Cantidad de cuartos:</p> <input min="0" class="form-control w-50 m-auto" type="number" id="inputCuartos">
             </div>
@@ -26,14 +26,16 @@
                         <input min="0" class="form-control " type="number" id="inputMin">
                     </div>
                     <div>
-                        <p> hasta:</p>
+                        <p>hasta: </p>
                         <input min="0" class="form-control " type="number" id="inputMax">
                     </div>
                 </div>
             </div>
-        </section>
+            <button type="submit" class="btn btn-success" id="btnBuscar">Buscar</button>
+            <button type="reset" class="btn btn-warning" id="btnLimpiar">Limpiar</button>
+        </form>
 
-        <button class="btn btn-warning" id="btnBuscar">Buscar</button>
+        
     </nav>
 
 
@@ -42,7 +44,7 @@
     <section id="Propiedades">
         <h4 class="py-3">Total: <span>0</span></h4>
 
-        <div class="propiedades">
+        <div class="propiedades" id="divPropiedades">
             
         </div>
         
