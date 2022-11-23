@@ -53,6 +53,7 @@ const spanTotal=document.querySelector("#spanTotal");
 function renderPropiedades(array) {
   if (array.length === 0) {
     divPropiedades.innerHTML = `<h5>No hay Propiedades que mostrar. Favor amplíe el filtro o haga otra búsqueda</h5>`;
+    spanTotal.innerHTML=`${array.length}`;
     return;
   } else {
     divPropiedades.innerHTML = "";
@@ -84,13 +85,12 @@ formulario.addEventListener("submit", (e) => {
   let min=+inputMin.value;
   let max=+inputMax.value;
   const arrayFiltrado=[];
-  divPropiedades.innerHTML = "";
   if (cantCuartos <= 0 || max <= 0 || min < 0) {
     alert("Debe ingresar valores mayores a 0");
     return;
     } else{
       console.log("entre al if");
-    
+      divPropiedades.innerHTML = "";
       for (let propiedad of propiedadesJSON) {
         if (propiedad.rooms === cantCuartos && propiedad.m>=min && propiedad.m<=max) {
           arrayFiltrado.push(propiedad);
