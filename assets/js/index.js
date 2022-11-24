@@ -46,14 +46,14 @@ const propiedadesJSON = [
 const inputCuartos = document.querySelector("#inputCuartos");
 const inputMin = document.querySelector("#inputMin");
 const inputMax = document.querySelector("#inputMax");
-const formulario=document.querySelector("#formulario");
-const divPropiedades=document.querySelector(".propiedades");
-const spanTotal=document.querySelector("#spanTotal");
+const formulario = document.querySelector("#formulario");
+const divPropiedades = document.querySelector(".propiedades");
+const spanTotal = document.querySelector("#spanTotal");
 
 function renderPropiedades(array) {
   if (array.length === 0) {
     divPropiedades.innerHTML = `<h5>No hay Propiedades que mostrar. Favor amplíe el filtro o haga otra búsqueda</h5>`;
-    spanTotal.innerHTML=`${array.length}`;
+    spanTotal.innerHTML = `${array.length}`;
     return;
   } else {
     divPropiedades.innerHTML = "";
@@ -72,30 +72,34 @@ function renderPropiedades(array) {
                 </section>
         </div>`;
     }
-    spanTotal.innerHTML=`${array.length}`
+    spanTotal.innerHTML = `${array.length}`;
   }
 }
 
 renderPropiedades(propiedadesJSON);
 
-formulario.addEventListener("reset",()=>renderPropiedades(propiedadesJSON));
+formulario.addEventListener("reset", () => renderPropiedades(propiedadesJSON));
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
-  let cantCuartos=+inputCuartos.value;
-  let min=+inputMin.value;
-  let max=+inputMax.value;
-  const arrayFiltrado=[];
+  let cantCuartos = +inputCuartos.value;
+  let min = +inputMin.value;
+  let max = +inputMax.value;
+  const arrayFiltrado = [];
   if (cantCuartos <= 0 || max <= 0 || min < 0) {
     alert("Debe ingresar valores mayores a 0");
     return;
-    } else{
-      console.log("entre al if");
-      divPropiedades.innerHTML = "";
-      for (let propiedad of propiedadesJSON) {
-        if (propiedad.rooms === cantCuartos && propiedad.m>=min && propiedad.m<=max) {
-          arrayFiltrado.push(propiedad);
-        }
+  } else {
+    console.log("entre al if");
+    divPropiedades.innerHTML = "";
+    for (let propiedad of propiedadesJSON) {
+      if (
+        propiedad.rooms === cantCuartos &&
+        propiedad.m >= min &&
+        propiedad.m <= max
+      ) {
+        arrayFiltrado.push(propiedad);
       }
-      }
-    return renderPropiedades(arrayFiltrado);
+    }
+  }
+  return renderPropiedades(arrayFiltrado);
 });

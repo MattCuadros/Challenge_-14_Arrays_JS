@@ -29,7 +29,7 @@ nav div{
 
 /* Propiedades */
 
-.propiedades {
+.propiedades{
     padding: 0px 5%;
     display:grid;
     grid-template-columns: repeat(4, 1fr);
